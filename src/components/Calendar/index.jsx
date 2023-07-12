@@ -51,7 +51,7 @@ export default function Calendar({
     const checkDate = new Date(
       calendar.currentYear,
       calendar.currentMonth,
-      date
+      date,
     ).getTime();
 
     return checkDate > now;
@@ -78,7 +78,7 @@ export default function Calendar({
         ))}
         {dateButtons.map((date, key) => (
           <Button
-            type='button'
+            type="button"
             key={key}
             onClick={() => handleSelectDate(date)}
             selected={selectedDate === date}
