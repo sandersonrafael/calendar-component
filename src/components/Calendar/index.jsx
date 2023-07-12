@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, DaysGrid, MonthsFlex } from './styles';
-import getCalendar from '../../utils/getCalendar';
-import monthsList from '../../utils/monthsList';
-import daysList from '../../utils/daysList';
+import getCalendar from './js/getCalendar';
 import { BsArrowLeftSquareFill, BsArrowRightSquareFill } from 'react-icons/bs';
+import defaultDaysList from './defaultValues/daysList';
+import defaultMonthsList from './defaultValues/monthsList';
 
-export default function Calendar({ setReturn, style }) {
+export default function Calendar({
+  setReturn,
+  style,
+  monthsList = defaultMonthsList,
+  daysList = defaultDaysList,
+  primaryColor,
+}) {
   const [relativeMonth, setRelativeMonth] = useState(0);
   const [whiteSpaces, setWhiteSpaces] = useState([]);
   const [calendar, setCalendar] = useState([]);
@@ -33,7 +39,11 @@ export default function Calendar({ setReturn, style }) {
 
   const handleSelectDate = (date) => {
     setSelectedDate(date);
-    setReturn([calendar.currentYear, calendar.currentMonth, date]);
+    setReturn({
+      year: calendar.currentYear,
+      month: calendar.currentMonth,
+      date,
+    });
   };
 
   const dateIsGray = (date) => {
@@ -51,7 +61,7 @@ export default function Calendar({ setReturn, style }) {
     <Container style={style}>
       <h1>{calendar.currentYear}</h1>
       <hr />
-      <MonthsFlex>
+      <MonthsFlex $primaryColor={primaryColor}>
         <BsArrowLeftSquareFill onClick={() => setRelativeMonth((v) => v - 1)} />
         <h2>{monthsList[calendar.currentMonth]}</h2>
         <BsArrowRightSquareFill
@@ -73,6 +83,7 @@ export default function Calendar({ setReturn, style }) {
             onClick={() => handleSelectDate(date)}
             selected={selectedDate === date}
             $dateIsGray={dateIsGray(date)}
+            $primaryColor={primaryColor}
           >
             {date}
           </Button>
@@ -83,6 +94,9 @@ export default function Calendar({ setReturn, style }) {
 }
 
 Calendar.propTypes = {
-  setReturn: PropTypes.func,
+  setReturn: PropTypes.func.isRequired,
   style: PropTypes.object,
+  monthsList: PropTypes.arrayOf(PropTypes.string),
+  daysList: PropTypes.arrayOf(PropTypes.string),
+  primaryColor: PropTypes.string,
 };

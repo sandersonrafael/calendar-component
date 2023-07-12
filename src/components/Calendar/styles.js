@@ -2,10 +2,10 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
   user-select: none;
-  width: 260px;
+  width: 270px;
   padding: 10px;
   background-color: #fff;
-  box-shadow: 0 0 7px 3px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 
   h1 {
@@ -28,15 +28,14 @@ export const MonthsFlex = styled.div`
     font-size: 20px;
   }
 
-
   svg {
-    color: #1FA8C5;
+    color: ${({ $primaryColor }) => $primaryColor ?? '#119edf'};
     cursor: pointer;
   }
 `;
 
 export const DaysGrid = styled.div`
-  margin-top: 15px;
+  margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 
@@ -48,16 +47,17 @@ export const DaysGrid = styled.div`
 `;
 
 export const Button = styled.button`
-    border-radius: 50%;
-    outline: none;
-    background-color: ${({ selected }) => selected ? '#1FA8C5' : 'transparent'};
-    color: ${({ selected, $dateIsGray }) => selected ? '#fff' : $dateIsGray ? '#ccc' : '#000'};
-    border: none;
-    cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+  background-color: ${({ selected, $primaryColor }) =>
+    selected ? $primaryColor ?? '#119edf' : 'transparent'};
+  color: ${({ selected, $dateIsGray }) =>
+    selected ? '#fff' : $dateIsGray ? '#ccc' : '#000'};
+  border: none;
+  cursor: pointer;
 
-    &:hover {
-      background-color: #1FA8C5;
-      color: #fff;
-    }
+  &:hover {
+    background-color: ${({ $primaryColor }) => $primaryColor ?? '#119edf'};
+    color: #fff;
+  }
 `;
-
