@@ -1,6 +1,4 @@
 import Calendar from './components/Calendar/index.jsx';
-import monthsList from './utils/monthsList.js';
-import daysList from './utils/daysList.js';
 import { useState } from 'react';
 
 function App() {
