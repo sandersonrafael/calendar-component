@@ -43,7 +43,7 @@ export const DaysGrid = styled.div`
     width: 38px;
     height: 38px;
     text-align: center;
-		margin: 0 auto;
+    margin: 0 auto;
   }
 `;
 
